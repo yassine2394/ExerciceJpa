@@ -5,6 +5,8 @@ import execice.jpa.Exercice.Jpa.repo.sales.orders.Order;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "order_Items",schema = "sales")
 @Getter
@@ -17,21 +19,21 @@ public class OrderItem {
     @Column(name = "item_id")
     int itemId;
 
-    @ManyToOne
-    @JoinColumn(name = "order_id", nullable = false)
+    @OneToOne
+    @JoinColumn(name = "order_id")
     Order order;
 
     @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)
     Product product;
 
-    @Column(name = "quantity")
+    @Column(name = "quantity", nullable = false)
     int quantity;
 
-    @Column(name = "list_price")
-    double listPrice;
+    @Column(name = "list_price", nullable = false)
+    BigDecimal listPrice;
 
-    @Column(name = "discount")
-    double discount;
+    @Column(name = "discount", nullable = false)
+    BigDecimal discount;
 
 }

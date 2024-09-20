@@ -21,8 +21,20 @@ public class Order {
     int orderId;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id", nullable = false)
+    @JoinColumn(name = "customer_id")
     Customer customer;
+
+    @Column(name="order_status", nullable = false)
+    byte orderStatus;
+
+    @Column(name="order_date", nullable = false)
+    LocalDate orderDate;
+
+    @Column(name="required_date", nullable = false)
+    LocalDate requiredDate;
+
+    @Column(name="shipped_date")
+    LocalDate shippedDate;
 
     @ManyToOne
     @JoinColumn(name = "store_id", nullable = false)
@@ -31,17 +43,5 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "staff_id", nullable = false)
     Staff staff;
-
-    @Column(name="order_status")
-    String orderStatus;
-
-    @Column(name="order_date")
-    LocalDate orderDate;
-
-    @Column(name="required_date")
-    LocalDate requiredDate;
-
-    @Column(name="shipped_date")
-    LocalDate shippedDate;
 
 }

@@ -14,13 +14,13 @@ public class Customer {
     @Id
     @Column(name = "customer_id")
     int customerId;
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = false)
     String firstName;
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false)
     String lastName;
     @Column(name = "phone")
     String phoneNumber;
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     String email;
     @Column(name = "street")
     String street;

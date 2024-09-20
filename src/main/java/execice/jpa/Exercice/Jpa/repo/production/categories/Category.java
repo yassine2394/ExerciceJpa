@@ -1,4 +1,20 @@
 package execice.jpa.Exercice.Jpa.repo.production.categories;
 
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "categories", schema = "production")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class Category {
+    @Id
+    @Column(name = "category_id")
+    int categoryId;
+
+    @Column(name = "category_name", nullable = false)
+    String categoryName;
 }
