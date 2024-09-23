@@ -16,18 +16,15 @@ import lombok.ToString;
 @ToString
 @IdClass(StockId.class)
 public class Stock {
-
     @Id
     @Column(name = "store_id")
     private int storeId;
     @Id
     @Column(name = "product_id")
     private int productId;
-
     @ManyToOne
     @JoinColumn(name = "store_id", referencedColumnName = "store_id")
     private Store store;
-
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName = "product_id")
     private Product product;

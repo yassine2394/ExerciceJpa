@@ -5,8 +5,7 @@ import lombok.*;
 
 @Entity
 @Table(name = "customers",schema = "sales")
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString

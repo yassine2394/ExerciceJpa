@@ -9,6 +9,7 @@ public class ExerciceJpaApplication {
 		SpringApplication.run(ExerciceJpaApplication.class, args);
 
 
+
 	}
 
 }
