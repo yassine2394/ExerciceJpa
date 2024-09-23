@@ -14,8 +14,8 @@ import java.util.List;
 @AllArgsConstructor
 public class StartRunner implements ApplicationRunner {
 
-    @Autowired CustomersRepo customersRepo;
-
+    //@Autowired CustomersRepo customersRepo;  // Injection de dépendance par annotation
+    private final CustomersRepo customersRepo; // Injection de dépendance par constructeur
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
