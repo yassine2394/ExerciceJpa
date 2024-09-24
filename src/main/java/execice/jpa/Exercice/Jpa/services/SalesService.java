@@ -22,7 +22,7 @@ public class SalesService {
 
     public CustomerDTO updateCustomer(Integer id, CustomerDTO customerDTO) {
         if (!customersRepo.existsById(id)) {
-            return null; // Ou lancer une exception si vous préférez
+            return null;
         }
         Customer customer = customerMapper.customerDTOToCustomer(customerDTO);
         customer.setCustomerId(id);

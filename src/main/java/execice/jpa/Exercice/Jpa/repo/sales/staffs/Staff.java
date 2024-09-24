@@ -13,6 +13,7 @@ import lombok.*;
 @ToString
 public class Staff {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "staff_id")
     int staffId;
 
