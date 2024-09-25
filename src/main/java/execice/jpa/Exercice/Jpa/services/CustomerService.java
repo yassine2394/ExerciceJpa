@@ -11,7 +11,8 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class SalesService {
+public class CustomerService {
+
     private final CustomersRepo customersRepo;
     private final CustomerMapper customerMapper = CustomerMapper.INSTANCE;
 

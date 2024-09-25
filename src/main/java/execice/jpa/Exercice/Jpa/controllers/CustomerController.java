@@ -1,66 +1,56 @@
 package execice.jpa.Exercice.Jpa.controllers;
 
 import execice.jpa.Exercice.Jpa.dto.CustomerDTO;
-import execice.jpa.Exercice.Jpa.services.SalesService;
+import execice.jpa.Exercice.Jpa.services.CustomerService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping(value = "/api/sales")
+@RequestMapping(value = "/api/customers")
 @AllArgsConstructor
-public class SalesController {
+public class CustomerController {
 
-    private final SalesService salesService;
+    private final CustomerService customerService;
 
-    @PostMapping("/customers")
+    @PostMapping
     public ResponseEntity<CustomerDTO> addCustomer(@RequestBody CustomerDTO customerDTO) {
-        CustomerDTO createdCustomer = salesService.addCustomer(customerDTO);
+        CustomerDTO createdCustomer = customerService.addCustomer(customerDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdCustomer);
     }
 
-    @PutMapping("/customers/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<CustomerDTO> updateCustomer(@PathVariable Integer id, @RequestBody CustomerDTO customerDTO) {
-        if (salesService.findCustomerById(id) == null) {
-            return ResponseEntity.notFound().build();
-        }
-        CustomerDTO updatedCustomer = salesService.updateCustomer(id, customerDTO);
+        CustomerDTO updatedCustomer = customerService.updateCustomer(id, customerDTO);
         return ResponseEntity.ok(updatedCustomer);
     }
 
-    @DeleteMapping("/customers/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCustomer(@PathVariable Integer id) {
-        if (salesService.findCustomerById(id) == null) {
-            return ResponseEntity.notFound().build();
-        }
-        salesService.deleteCustomer(id);
+        customerService.deleteCustomer(id);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/customers/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<CustomerDTO> findCustomerById(@PathVariable Integer id) {
-        CustomerDTO customer = salesService.findCustomerById(id);
-        if (customer == null) {
-            return ResponseEntity.notFound().build();
-        }
+        CustomerDTO customer = customerService.findCustomerById(id);
         return ResponseEntity.ok(customer);
     }
 
-    @GetMapping("/customers")
+    @GetMapping
     public ResponseEntity<List<CustomerDTO>> findAllCustomers() {
-        List<CustomerDTO> customers = salesService.findAllCustomers();
+        List<CustomerDTO> customers = customerService.findAllCustomers();
         return ResponseEntity.ok(customers);
     }
 
-    @GetMapping("/customers/search")
+    @GetMapping("/search")
     public ResponseEntity<List<CustomerDTO>> findCustomersByCityOrZipCode(
             @RequestParam(required = false) String city,
             @RequestParam(required = false) String zipCode) {
-        List<CustomerDTO> customers = salesService.findCustomersByCityOrZipCode(city, zipCode);
+        List<CustomerDTO> customers = customerService.findCustomersByCityOrZipCode(city, zipCode);
         return ResponseEntity.ok(customers);
     }
 }
