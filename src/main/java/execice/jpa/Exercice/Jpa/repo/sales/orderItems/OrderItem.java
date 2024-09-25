@@ -26,6 +26,7 @@ public class OrderItem {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+    @Column(name = "quantity",columnDefinition ="int")
     private int quantity;
     @Column(name = "list_price")
     private double listPrice;

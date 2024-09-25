@@ -25,6 +25,6 @@ public class Store {
     private String street;
     private String city;
     private String state;
-    @Column(name = "zip_code")
+    @Column(name = "zip_code", columnDefinition ="int")
     private int zipCode;
 }

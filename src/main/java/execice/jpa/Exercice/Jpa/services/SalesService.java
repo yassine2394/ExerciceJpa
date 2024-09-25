@@ -2,9 +2,17 @@ package execice.jpa.Exercice.Jpa.services;
 
 import execice.jpa.Exercice.Jpa.controllers.payloads.StaffPayload;
 import execice.jpa.Exercice.Jpa.controllers.payloads.StorePayload;
+import execice.jpa.Exercice.Jpa.controllers.productionDTO.CategorySalesDTO;
+import execice.jpa.Exercice.Jpa.controllers.productionDTO.ProductMapper;
+import execice.jpa.Exercice.Jpa.controllers.productionDTO.ProductSalesDTO;
 import execice.jpa.Exercice.Jpa.controllers.salesDTO.*;
+import execice.jpa.Exercice.Jpa.repo.production.categories.Category;
+import execice.jpa.Exercice.Jpa.repo.production.products.Product;
 import execice.jpa.Exercice.Jpa.repo.sales.customers.Customer;
 import execice.jpa.Exercice.Jpa.repo.sales.customers.CustomersRepo;
+import execice.jpa.Exercice.Jpa.repo.sales.orderItems.OrderItemsRepo;
+import execice.jpa.Exercice.Jpa.repo.sales.orders.Order;
+import execice.jpa.Exercice.Jpa.repo.sales.orders.OrdersRepo;
 import execice.jpa.Exercice.Jpa.repo.sales.staffs.Staff;
 import execice.jpa.Exercice.Jpa.repo.sales.staffs.StaffRepo;
 import execice.jpa.Exercice.Jpa.repo.sales.stores.Store;
@@ -14,6 +22,7 @@ import execice.jpa.Exercice.Jpa.services.IServices.IStaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 @Service
@@ -25,10 +34,16 @@ public class SalesService implements ICustomerService, IStaffService {
     private StaffRepo staffRepo;
     @Autowired
     private StoreRepo storeRepo;
+    @Autowired
+    private OrderItemsRepo orderItemsRepo;
+    @Autowired
+    private OrdersRepo orderRepo;
 
     private final CustomerMapper customerMapper = CustomerMapper.INSTANCE;
     private  final StaffMapper staffMapper = StaffMapper.INSTANCE;
     private  final StoreMapper storeMapper= StoreMapper.INSTANCE;
+    private final ProductMapper productMapper = ProductMapper.INSTANCE;
+
 
 
     //Gestion des Customers
@@ -171,26 +186,44 @@ public class SalesService implements ICustomerService, IStaffService {
                 .collect(Collectors.toList());
     }
 
-    public StoreDTO updateStore(int storeId, StorePayload payload){
 
-        Store  store = storeRepo.findByStoreId(storeId);
+    public StoreDTO updateStore(int storeId, StorePayload payload) {
 
-       store.setStoreName(payload.getStoreName());
-       store.setPhone(payload.getPhone());
-       store.setEmail(payload.getEmail());
-       store.setStreet(payload.getStreet());
-       store.setCity(payload.getCity());
-       store.setState(payload.getState());
-       store.setZipCode(payload.getZipCode());
+        Store store = storeRepo.findByStoreId(storeId);
+        store.setStoreName(payload.getStoreName());
+        store.setPhone(payload.getPhone());
+        store.setEmail(payload.getEmail());
+        store.setStreet(payload.getStreet());
+        store.setCity(payload.getCity());
+        store.setState(payload.getState());
+        store.setZipCode(payload.getZipCode());
         store = storeRepo.save(store);
-        return  storeMapper.toDTO(store);
-
+        return storeMapper.toDTO(store);
     }
 
     public void deleteStore(int storeId){
         Store store = storeRepo.findByStoreId(storeId);
         storeRepo.delete(store);
     }
+
+    //Gestion de statistics
+
+    public List<ProductSalesDTO> getTopSellingProducts() {
+        List<Object[]> results = orderItemsRepo.findTopSellingProducts();
+        return results.stream()
+                .map(result -> new ProductSalesDTO(((Product) result[0]), (int) result[1]))
+                .collect(Collectors.toList());
+    }
+
+    public List<CategorySalesDTO> getTopSellingCategories() {
+        List<Object[]> results = orderItemsRepo.findTopSellingCategories();
+        return results.stream()
+                .map(result -> new CategorySalesDTO((Category) result[0], (int) result[1]))
+                .collect(Collectors.toList());
+    }
+
+    //Gestion des Orders
+
 
 
 

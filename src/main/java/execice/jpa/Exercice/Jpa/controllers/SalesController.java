@@ -1,8 +1,11 @@
 package execice.jpa.Exercice.Jpa.controllers;
 
 import execice.jpa.Exercice.Jpa.controllers.payloads.StaffPayload;
+import execice.jpa.Exercice.Jpa.controllers.payloads.StorePayload;
 import execice.jpa.Exercice.Jpa.controllers.salesDTO.CustomerDTO;
 import execice.jpa.Exercice.Jpa.controllers.salesDTO.StaffDTO;
+import execice.jpa.Exercice.Jpa.controllers.salesDTO.StoreDTO;
+import execice.jpa.Exercice.Jpa.repo.sales.stores.Store;
 import execice.jpa.Exercice.Jpa.services.SalesService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +46,7 @@ public class SalesController {
         return new ResponseEntity<>(customerDTOs, HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/updatecustomer/{id}")
     public ResponseEntity<CustomerDTO> updateCustomer(@PathVariable int id, @RequestBody CustomerDTO customerDTO) {
         CustomerDTO updatedCustomer = salesService.updateCustomer(id, customerDTO);
         return new ResponseEntity<>(updatedCustomer, HttpStatus.OK);
@@ -75,7 +78,7 @@ public class SalesController {
         return new ResponseEntity<>(staffDTOs, HttpStatus.OK);
     }
 
-    @PutMapping("/updateStaff")
+    @PutMapping("/updateStaff/{id}")
     public ResponseEntity<StaffDTO> updateStaff(@PathVariable int id, @RequestBody StaffDTO dto){
         StaffDTO updateStaff = salesService.updateStaff(id, dto);
         return new ResponseEntity<>(updateStaff, HttpStatus.OK);
@@ -92,6 +95,42 @@ public class SalesController {
         salesService.deleteStaff(id);
         return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    // Gestion de Store
+    @PostMapping("/createStore")
+    public StoreDTO createStore(@RequestBody StorePayload payload){
+        StoreDTO storeDTO = salesService.CreateStore(payload);
+        return  storeDTO;
+    }
+
+    @GetMapping("/store/{id}")
+    public StoreDTO getStoreById(@PathVariable int id){
+       StoreDTO storeDTO = salesService.getStoreById(id);
+       return storeDTO;
+
+    }
+
+    @GetMapping("/allStore")
+    public List<StoreDTO> getAllStore(){
+        List<StoreDTO> storeDTOS = salesService.getAllStore();
+        return  storeDTOS;
+    }
+
+    //mise à jour
+    @PutMapping("/updateStore/{id}")
+    public StoreDTO updateStore(@PathVariable int id, @RequestBody StorePayload payload) {
+        StoreDTO storeDTO = salesService.updateStore(id, payload);
+        return storeDTO;
+    }
+
+    @DeleteMapping("/deleteStore/{id}")
+    public void deleteStore(@PathVariable int id){
+        salesService.deleteStore(id);
+    }
+
+
+
+
 
 
 }

@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.springframework.data.domain.Sort;
 
 import java.math.BigDecimal;
 
@@ -30,8 +29,9 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+    @Convert(converter = VarbinaryToIntConverter.class)
     @Column(name = "model_year")
-    private Sort modelYear;
+    private Integer modelYear;
     @Column(name = "list_price")
     private BigDecimal listPrice;
 

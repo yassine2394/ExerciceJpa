@@ -26,7 +26,7 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
-    @Column(name = "order_status")
+    @Column(name = "order_status", columnDefinition ="int")
     private int orderStatus;
     @Column(name = "order_date")
     private LocalDate orderDate;
