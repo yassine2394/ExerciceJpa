@@ -8,14 +8,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class StoreDTO {
-    int storeId;
+public class CategoryDTO {
+    int categoryId;
     @NotBlank(message = "Le nom ne peut pas être vide")
-    String storeName;
-    String phone;
-    String email;
-    String street;
-    String city;
-    String state;
-    String zipCode;
+    String categoryName;
 }

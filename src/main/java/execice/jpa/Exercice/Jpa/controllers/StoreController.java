@@ -2,6 +2,7 @@ package execice.jpa.Exercice.Jpa.controllers;
 
 import execice.jpa.Exercice.Jpa.dto.StoreDTO;
 import execice.jpa.Exercice.Jpa.services.StoreService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,13 +18,13 @@ public class StoreController {
     private final StoreService storeService;
 
     @PostMapping
-    public ResponseEntity<StoreDTO> addStore(@RequestBody StoreDTO storeDTO) {
+    public ResponseEntity<StoreDTO> addStore(@Valid @RequestBody StoreDTO storeDTO) {
         StoreDTO createdStore = storeService.addStore(storeDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdStore);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<StoreDTO> updateStore(@PathVariable int id, @RequestBody StoreDTO storeDTO) {
+    public ResponseEntity<StoreDTO> updateStore(@PathVariable int id, @Valid @RequestBody StoreDTO storeDTO) {
         StoreDTO updatedStore = storeService.updateStore(id, storeDTO);
         return ResponseEntity.ok(updatedStore);
     }

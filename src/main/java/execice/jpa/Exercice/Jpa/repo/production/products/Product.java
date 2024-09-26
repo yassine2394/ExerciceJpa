@@ -16,6 +16,7 @@ import java.math.BigDecimal;
 @ToString
 public class Product {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
     int productId;
 

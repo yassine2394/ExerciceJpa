@@ -1,5 +1,6 @@
 package execice.jpa.Exercice.Jpa.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Getter
@@ -9,7 +10,9 @@ import lombok.*;
 @ToString
 public class StaffDTO {
     int staffId;
+    @NotBlank(message = "Le prénom ne peut pas être vide")
     String firstName;
+    @NotBlank(message = "Le nom ne peut pas être vide")
     String lastName;
     String email;
     String phone;
