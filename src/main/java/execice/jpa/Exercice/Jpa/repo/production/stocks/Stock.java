@@ -1,7 +1,27 @@
 package execice.jpa.Exercice.Jpa.repo.production.stocks;
 
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.*;
 
-@Table(name = "stock",schema = "sales")
+@Entity
+@Table(name = "stocks", schema = "production")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@IdClass(StockId.class)
 public class Stock {
+
+    @Id
+    @Column(name = "store_id")
+    int storeId;
+
+    @Id
+    @Column(name = "product_id")
+    int productId;
+
+    @Column(name = "quantity")
+    int quantity;
+
 }
