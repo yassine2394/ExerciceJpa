@@ -1,0 +1,10 @@
+package execice.jpa.Exercice.Jpa.repo.authentification.user;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface RoleRepo extends JpaRepository<Role, Long> {
+
+    Role findByName(String name);
+}
+
+

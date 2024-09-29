@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class StockPayload {
+
     private int storeId;
     private int productId;
     private int quantity;

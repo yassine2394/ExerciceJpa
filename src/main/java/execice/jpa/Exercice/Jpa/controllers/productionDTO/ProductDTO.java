@@ -16,7 +16,7 @@ public class ProductDTO {
     private String productName;
     private int modelYear;
     private BigDecimal listPrice;
-    private Brand brand;
-    private Category category;
+    private int brandId;
+    private int categoryId;
 
 }

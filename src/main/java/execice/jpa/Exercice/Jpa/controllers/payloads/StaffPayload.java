@@ -7,11 +7,12 @@ import lombok.Data;
 @Data
 public class StaffPayload {
 
+    private int staffId;
     private String firstName;
     private String lastName;
     private String email;
     private String phone;
     private boolean active;
     private int storeId;
-    private int managerId;
+    private int manager;
 }

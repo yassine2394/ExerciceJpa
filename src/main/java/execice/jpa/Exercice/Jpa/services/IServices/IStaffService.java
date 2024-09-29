@@ -12,8 +12,8 @@ public interface IStaffService {
 
     StaffDTO getStaffById(int customerId);
     List<StaffDTO> getAllStaff();
-    StaffDTO updateStaff(int staffId, StaffDTO staffDTO);
+    StaffDTO updateStaff(int staffId, StaffPayload payload);
     void deleteStaff(int staffId);
-    StaffDTO assignManager(StaffPayload manager);
+
 
 }

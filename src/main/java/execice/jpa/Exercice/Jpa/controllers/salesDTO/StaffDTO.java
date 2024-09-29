@@ -13,6 +13,6 @@ public class StaffDTO {
     private String email;
     private String phone;
     private boolean active;
-    private Store store;
-    private Staff staff;
+    private int storeId;
+    private int manager;
 }
